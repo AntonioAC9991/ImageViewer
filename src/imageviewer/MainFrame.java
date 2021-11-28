@@ -1,22 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package imageviewer;
+package ImageViewer;
 
+import presenter.Command;
+import View.UI.Swing.SwingImageDisplay;
+import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.PopupMenu;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import view.ui.swing.SwingImageDisplay;
+import javax.swing.JPanel;
 
-/**
- *
- * @author AntonioAguado
- */
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
 
-    SwingImageDisplay imageDisplay;
+    private SwingImageDisplay imageDisplay;
+    private Map<String, Command> commands = new HashMap<>();
     
     public MainFrame() {
         this.setTitle("Image Viewer");
@@ -25,6 +22,8 @@ public class MainFrame extends JFrame{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         this.add(image());
+        this.add(toolbar(), BorderLayout.SOUTH);
+        this.setVisible(true);
     }
 
     private Component image() {
@@ -33,9 +32,25 @@ public class MainFrame extends JFrame{
         return swingImageDisplay;
     }
 
-    public SwingImageDisplay getImageDisplay() {
-        return imageDisplay;
+    public void add(Command command){
+        commands.put(command.name(), command);
     }
     
+    public SwingImageDisplay getImageDisplay() {
+        return imageDisplay;
+    }  
     
+    public Component toolbar(){
+        JPanel panel = new JPanel();
+        
+        panel.add(button("Previous"));
+        panel.add(button("Next"));
+        
+        return panel;
+    }
+    
+    public Component button(String name){
+        JButton jButton = new JButton(name);
+        return jButton;
+    }
 }

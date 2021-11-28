@@ -1,58 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package view.ui.swing;
+package View.UI.Swing;
 
+import model.Image;
+import view.ui.ImageDisplay;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.PopupMenu;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import model.Image;
-import view.ui.ImageDisplay;
 
-/**
- *
- * @author AntonioAguado
- */
 public class SwingImageDisplay extends JPanel implements ImageDisplay{
 
     private Image image;
+    
+    public Image getImage(){
+        return image;
+    }
 
     public SwingImageDisplay() {
         super(new BorderLayout());
     }
     
     
-    @Override
+    
+    
     public void display(Image image) {
         this.image = image;
+        
         this.removeAll();
         this.add(imagePanel());
+        this.updateUI();
     }
 
     private Component imagePanel() {
+        
         return new JPanel(){
-            @Override
+            
+            @Override 
             public void paint(Graphics g){
-                g.drawImage(bitmap(), 0, 0, this.getWidth(), this.getHeight(), null);
+                g.drawImage(bitMap(), 0, 0, this.getWidth(), this.getHeight(), null);
             }
-            private java.awt.Image bitmap(){
+            
+            private java.awt.Image bitMap(){
+            
                 try{
                     return ImageIO.read(new ByteArrayInputStream(image.bitmap()));
-                }catch(IOException ex) {
+                } catch (IOException ex){
                     System.out.println("" + ex.getMessage());
                     return null;
+                    
                 }
-               
-                
             }
         };
+        
     }
     
 }
