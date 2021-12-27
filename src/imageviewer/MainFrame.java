@@ -1,19 +1,21 @@
-package ImageViewer;
+package imageviewer;
 
 import presenter.Command;
-import View.UI.Swing.SwingImageDisplay;
+import view.ui.swing.SwingImageDisplay;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
 
     private SwingImageDisplay imageDisplay;
-    private Map<String, Command> commands = new HashMap<>();
+    private Map<String, Command> commands = new HashMap<String,Command>();
     
     public MainFrame() {
         this.setTitle("Image Viewer");
